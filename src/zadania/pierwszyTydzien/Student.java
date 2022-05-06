@@ -1,6 +1,9 @@
 package zadania.pierwszyTydzien;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -58,16 +61,45 @@ public class Student {
         this.name = name;
     }
 
+    ///tresc zadania 6 z dnia 9 o czasie
+    /*String input = "2022-04-16 13:10:15";
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    LocalDateTime dataTime = LocalDateTime.parse(input, formatter);
+        System.out.println(dataTime);
+
+    LocalDateTime now = LocalDateTime.now();
+
+    Duration duration = Duration.between(now, dataTime);
+    long days = duration.toDaysPart();
+    int hours = duration.toHoursPart();
+    int minutes = duration.toMinutesPart();
+    int secs = duration.toSecondsPart();
+        System.out.println("You have Days: " + days + " Hours: " + hours + " Minutes: "+ minutes + " Seconds: " + secs);
+        System.out.printf("You have Days: %d Hours: %d Minutes %d Secunds %d", days, hours, minutes, secs);
+        System.out.println();
+        System.out.printf("You have Days: %02d Hours: %02d Minutes %02d Secunds %02d", days, hours, minutes, secs);
+        System.out.printf("\n%02d:%02d:%02d:%02d", days, hours, minutes, secs);*/
+
     public String getDateOfBirth() {
         return dateOfBirth;
     }
 
     public int getAge() {
         System.out.println("Przypomnieć sobie local date");
-        return -1;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime dataTime = LocalDateTime.parse(getDateOfBirth(), formatter);
+        System.out.println(dataTime);
+
+        LocalDateTime now = LocalDateTime.now();
+
+        Duration duration = Duration.between(now, dataTime);
+        long days = duration.toDaysPart();
+        int years = (int) (days / 365);
+        return years;
     }
 
     public void setDateOfBirth(String dateOfBirth) {
+        //yyyy-MM-dd HH:mm:ss
         this.dateOfBirth = dateOfBirth;
     }
 //    public void setDateOfBirth(ZonedDateTime dateOfBirth) {
