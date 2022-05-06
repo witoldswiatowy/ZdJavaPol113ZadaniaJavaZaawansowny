@@ -12,7 +12,7 @@ public class StudentDatabase {
 //    public static void addStudent(ArrayList<Student> listOfStudent, Student potencialStudent) throws Exception {
         if (potencialStudent.getPkt() > 25) {
             listOfStudent.add(potencialStudent);
-            System.out.println("Dodałem: " + potencialStudent.getForname() + " " + potencialStudent.getName() + "do listy studentów" );
+            System.out.println("Dodałem: " + potencialStudent.getForname() + " " + potencialStudent.getName() + "do listy studentów");
         } else {
             System.out.println("Mr./Ms. " + potencialStudent.getForname() + " " + potencialStudent.getName() + " has been rejected");
 //            throw MojException;
@@ -46,28 +46,40 @@ public class StudentDatabase {
             String searchingCity = listOfStudent.get(i).getAddress().getCity();
             if (searchingCity.equals(city)) {
                 listOfStudentFromCity.add(listOfStudent.get(i));
-                System.out.println("Dodałem studenta: " + listOfStudent.get(i).getId());
+                System.out.println(listOfStudent.get(i).getId());
+                listOfStudent.get(i).przedstawSie();
             }
         }
         return listOfStudentFromCity;
     }
 
-    public ArrayList<Student> getStudentrderByAge(ArrayList<Student> listOfStudent, String age) {
-        //przypomnieć sobie localDate
-        return listOfStudent;
+    public ArrayList<Student> getStudentByAge(ArrayList<Student> listOfStudent, int age) {
+        ArrayList<Student> listOfStudentByAge = new ArrayList<>();
+        for (int i = 0; i < listOfStudent.size(); i++) {
+            int searchingAge = listOfStudent.get(i).getAge();
+            if (searchingAge == age) {
+                listOfStudentByAge.add(listOfStudent.get(i));
+                System.out.println(listOfStudent.get(i).getId());
+                listOfStudent.get(i).przedstawSie();
+            }
+        }
+        return listOfStudentByAge;
     }
 
-    public void punishStudents(int age, String city, Student student, ArrayList<Student> listOfStudent) {
-        if (student.getAge() > 20) {
-            student.setPkt(-10);
-            if (!(student.getAddress().getCity().equals(city))) {
+    public void punishStudents(int age, String city, ArrayList<Student> listOfStudent) {
+        for (int i = 0; i < listOfStudent.size(); i++) {
+            Student student = listOfStudent.get(i);
+            if (student.getAge() > age) {
+                student.setPkt(-10);
+                if (!(student.getAddress().getCity().equals(city))) {
+                    student.setPkt(-10);
+                }
+            } else if (!(student.getAddress().getCity().equals(city))) {
                 student.setPkt(-10);
             }
-        } else if (!(student.getAddress().getCity().equals(city))){
-            student.setPkt(-10);
-        }
-        if (student.getPkt()<30){
-            listOfStudent.remove(student);
+            if (student.getPkt() < 30) {
+                listOfStudent.remove(student);
+            }
         }
     }
 }
