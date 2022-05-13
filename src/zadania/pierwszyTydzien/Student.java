@@ -18,7 +18,7 @@ public class Student {
     private String name;
     //        private ZonedDateTime dateOfBirth;
     private String dateOfBirth;
-    private Address address;
+    Address address;
     private int pkt;
 
     public Student(String forname, String name, String dateOfBirth, Address address) {
@@ -27,6 +27,7 @@ public class Student {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.address = address;
+
         setPkt();
     }
 
